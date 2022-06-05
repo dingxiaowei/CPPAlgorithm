@@ -1,7 +1,12 @@
 ﻿/*
 C++常见算法
+//排序 冒泡排序、快速排序
+//查找 二分查找
+//字符串操作 分割、替换
+//树操作(遍历)
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 //快速排序，找一个基准数，比它小的放左边，比它大的放右边
@@ -36,6 +41,76 @@ void QuickSort(int arr[], int left, int right) {
 	QuickSort(arr, start + 1, right);
 }
 
+//递归方式二分查找
+int BinarySearch(int array[], int low, int high, int target) {
+	int middle = (low + high) / 2;
+	if (low > high) {
+		return -1;
+	}
+	if (target == array[middle]) {
+		return middle;
+	}
+	if (target < array[middle]) {
+		return BinarySearch(array, low, middle - 1, target);
+	}
+	if (target > array[middle]) {
+		return BinarySearch(array, middle + 1, high, target);
+	}
+	return -1;
+}
+
+//非递归方式二分查找
+int BinarySearch2(int array[], int n, int target) {
+	int low = 0, high = n, middle = 0;
+	while (low < high) {
+		middle = (low + high) / 2;
+		if (target == array[middle]) {
+			return middle;
+		}
+		else if (target < array[middle]) {
+			high = middle;
+		}
+		else if (target > array[middle]) {
+			low = middle + 1;
+		}
+	}
+	return -1;
+}
+
+void StrTest()
+{
+	/*
+	cout << "====输入字符串(字符数组接受的方式)=======" << endl;
+	char a[20];
+	cin.getline(a,20);
+	cout << a << endl;
+
+	cout << "======连续输入两个数字(空格分隔)===========" << endl;
+	int m, n;
+	cin >> m >> n;
+	cout << "m + n = " << m + n << endl;
+
+	cout << "=====输入一个字符===========" << endl;
+	char c;
+	c = cin.get(); //只能获取一个字符
+	cout << c << endl;
+	*/
+	cout << "=======字符串测试======" << endl;
+	//字符串打印
+	string str = "hello";
+	cout << str << endl;
+	//字符串拼接
+	str += " world";
+	cout << str << endl;
+	//字符串的查找
+	int index = str.find("llo");
+	cout << "llo索引是" << index << endl;
+	cout << "第0个字符:" << str[0] << endl;
+	//字符串替换
+	string str1 = str.replace(0, 2, "111");//从0开始的位置，两个字符被替换
+	cout << str1 << endl;
+}
+
 int main()
 {
 	//冒泡排序
@@ -58,6 +133,12 @@ int main()
 		cout << arr[i] << " ";
 	}
 	cout << endl;
+
+	cout << "======二分查找数字3的索引(递归方式)=====" << endl;
+	cout << BinarySearch(arr, 0, end, 3) << endl;
+
+	cout << "======二分查找数字3的索引(非递归方式)=====" << endl;
+	cout << BinarySearch2(arr, end, 3) << endl;
 
 	for (int i = 0; i < end; i++)
 	{
@@ -157,5 +238,15 @@ int main()
 		cout << endl;
 	}
 
+	//StrTest();
+
+	cout << "======整数倒序输出====" << endl;
+	int num, sum = 0;
+	cin >> num;
+	while (num) {
+		sum = num % 10 + sum * 10;
+		num /= 10;
+	}
+	cout << sum;
 	return 0;
 }
