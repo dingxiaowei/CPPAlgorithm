@@ -240,13 +240,25 @@ int main()
 
 	//StrTest();
 
-	cout << "======整数倒序输出====" << endl;
+	cout << "======整数倒序输出(整除求余的方式)====" << endl;
 	int num, sum = 0;
 	cin >> num;
 	while (num) {
 		sum = num % 10 + sum * 10;
 		num /= 10;
 	}
-	cout << sum;
+	cout << sum << endl;
+
+	cout << "====整数倒序输出(转换字符串的方式)=====" << endl;
+	int num1;
+	cin >> num1;
+	string str = to_string(num1);
+	for (int i = str.size(); i >= 0; i--)
+	{
+		if (str[i] != '0') {
+			cout << str[i];
+		}
+	}
+	cout << endl;
 	return 0;
 }
