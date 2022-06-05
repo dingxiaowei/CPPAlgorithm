@@ -7,6 +7,7 @@ C++常见算法
 */
 #include <iostream>
 #include <string>
+#include <iomanip> //保留小数位的命名空间
 using namespace std;
 
 //快速排序，找一个基准数，比它小的放左边，比它大的放右边
@@ -107,8 +108,40 @@ void StrTest()
 	cout << "llo索引是" << index << endl;
 	cout << "第0个字符:" << str[0] << endl;
 	//字符串替换
-	string str1 = str.replace(0, 2, "111");//从0开始的位置，两个字符被替换
+	string str1 = str.replace(0, 2, "替换的字符串");//从0开始的位置，两个字符被替换
 	cout << str1 << endl;
+}
+
+void ReverseNum()
+{
+	//438输出843  100输出001
+	cout << "======整数倒序输出(整除求余的方式)====" << endl;
+	int num, sum = 0;
+	cin >> num;
+	while (num) {
+		sum = num % 10 + sum * 10;   //整数求余就是取最后一位数字  整除10就是剔除最后一位数字并且降低一位
+		num /= 10;
+	}
+	cout << sum << endl;
+
+	cout << "====整数倒序输出(转换字符串的方式)=====" << endl;
+	int num1;
+	cin >> num1;
+	bool flag = false;
+	string str = to_string(num1);
+	for (int i = str.size() - 1; i >= 0; i--)
+	{
+		if (flag)
+			cout << str[i];
+		else
+		{
+			if (str[i] != '0') {
+				flag = true;
+				cout << str[i];
+			}
+		}
+	}
+	cout << endl;
 }
 
 int main()
@@ -237,28 +270,14 @@ int main()
 		}
 		cout << endl;
 	}
-
+	//字符串测试
 	//StrTest();
+	//整数倒序输出
+	ReverseNum();
 
-	cout << "======整数倒序输出(整除求余的方式)====" << endl;
-	int num, sum = 0;
-	cin >> num;
-	while (num) {
-		sum = num % 10 + sum * 10;
-		num /= 10;
-	}
-	cout << sum << endl;
-
-	cout << "====整数倒序输出(转换字符串的方式)=====" << endl;
-	int num1;
-	cin >> num1;
-	string str = to_string(num1);
-	for (int i = str.size(); i >= 0; i--)
-	{
-		if (str[i] != '0') {
-			cout << str[i];
-		}
-	}
-	cout << endl;
+	cout << "======测试浮点数保留小数位======" << endl;
+	//浮点数保留位数
+	float f = 0.4324f;
+	cout << setprecision(2) << f << endl;
 	return 0;
 }
